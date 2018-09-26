@@ -239,3 +239,109 @@ function collisionHandler (bullet, alien) {
 
 }
 
+function enemyHitsPlayer (player,bullet) {
+    
+    bullet.kill();
+
+    live = lives.getFirstAlive();
+
+    if (live)
+    {
+        live.kill();
+    }
+
+    //  And create an explosion :)
+    var explosion = explosions.getFirstExists(false);
+    explosion.reset(player.body.x, player.body.y);
+    explosion.play('kaboom', 30, false, true);
+
+    // When the player dies
+    if (lives.countLiving() < 1)
+    {
+        player.kill();
+        enemyBullets.callAll('kill');
+
+        stateText.text=" GAME OVER \n Click to restart";
+        stateText.visible = true;
+
+        //the "click to restart" handler
+        game.input.onTap.addOnce(restart,this);
+    }
+
+}
+
+function enemyFires () {
+
+    //  Grab the first bullet we can from the pool
+    enemyBullet = enemyBullets.getFirstExists(false);
+
+    livingEnemies.length=0;
+
+    aliens.forEachAlive(function(alien){
+
+        // put every living enemy in an array
+        livingEnemies.push(alien);
+    });
+
+
+    if (enemyBullet && livingEnemies.length > 0)
+    {
+        
+        var random=game.rnd.integerInRange(0,livingEnemies.length-1);
+
+        // randomly select one of them
+        var shooter=livingEnemies[random];
+        // And fire the bullet from this enemy
+        enemyBullet.reset(shooter.body.x, shooter.body.y);
+
+        game.physics.arcade.moveToObject(enemyBullet,player,300);
+        firingTimer = game.time.now + 2000;
+    }
+
+}
+
+function fireBullet () {
+
+    //  To avoid them being allowed to fire too fast we set a time limit
+    if (game.time.now > bulletTime)
+    {
+        //  Grab the first bullet we can from the pool
+        bullet = bullets.getFirstExists(false);
+
+        if (bullet)
+        {
+            //  And fire it
+            bullet.reset(player.x, player.y + 8);
+            bullet.body.velocity.y = -400;
+            bulletTime = game.time.now + 200;
+        }
+    }
+
+}
+
+function resetBullet (bullet) {
+
+    //  Called if the bullet goes out of the screen
+    bullet.kill();
+
+}
+
+function restart () {
+
+    //  A new level starts
+    
+    //resets the life count
+    lives.callAll('revive');
+    //  And brings the aliens back from the dead :)
+    aliens.removeAll();
+    createAliens();
+
+    //revives the player
+    player.revive();
+    //hides the text
+    stateText.visible = false;
+
+}
+    </script>
+    </body>
+    </html>
