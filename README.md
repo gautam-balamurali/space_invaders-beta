@@ -11,4 +11,4 @@ Download phaser.min.js or phaser.js and paste it into the folder where your inde
 [View License](https://github.com/gautam-balamurali/dgh-phaserjsDemo_invaders/blob/master/LICENSE.md)
 
 # Preview
-[Space Invaders - beta](https://gautam-balamurali.github.io/dgh-phaserjsDemo_invaders/)
+[Space Invaders - beta](https://gautam-balamurali.github.io/space_invaders-beta/)
