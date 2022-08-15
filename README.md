@@ -7,8 +7,8 @@ Use right and left arrow keys to move the spaceship and press spacebar to fire.
 # How to run? 
 Download phaser.min.js or phaser.js and paste it into the folder where your index.html code exists and run index.html.
 
-## License
-[View License](https://github.com/gautam-balamurali/consultancy-web-app/blob/master/LICENSE.md)
+# License
+[View License](https://github.com/gautam-balamurali/dgh-phaserjsDemo_invaders/blob/master/LICENSE.md)
 
 # Preview
 [Space Invaders - beta](https://gautam-balamurali.github.io/dgh-phaserjsDemo_invaders/)
